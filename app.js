@@ -129,14 +129,6 @@ const ariaLabels = {
   }
 };
 
-function saveLanguage(language) {
-  try {
-    localStorage.setItem('proposal-language', language);
-  } catch (_) {
-    // The switch still works when storage is unavailable.
-  }
-}
-
 function setLanguage(language) {
   const copy = language === 'ru' ? russianCopy : kazakhCopy;
   Object.entries(copy).forEach(([selector, value]) => {
@@ -162,21 +154,13 @@ function setLanguage(language) {
     button.setAttribute('aria-pressed', String(button.dataset.language === language));
   });
 
-  saveLanguage(language);
 }
 
 document.querySelectorAll('[data-language]').forEach((button) => {
   button.addEventListener('click', () => setLanguage(button.dataset.language));
 });
 
-let initialLanguage = (navigator.language || 'ru').toLowerCase().startsWith('kk') ? 'kz' : 'ru';
-try {
-  const savedLanguage = localStorage.getItem('proposal-language');
-  if (savedLanguage === 'ru' || savedLanguage === 'kz') initialLanguage = savedLanguage;
-} catch (_) {
-  // Use the browser language when storage is unavailable.
-}
-setLanguage(initialLanguage);
+setLanguage('kz');
 
 const revealItems = document.querySelectorAll('.reveal');
 
