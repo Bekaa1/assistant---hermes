@@ -47,17 +47,24 @@
           <p class="hero-text">Есептер, құжаттар және тапсырмалар — WhatsApp немесе Telegram-дағы бір хабарламадан. Сіз міндетті айтасыз. Ассистент нәтижені дайындайды.</p>
           <div class="hero-action">
             <a class="button button--signal" href="https://wa.me/77479896274?text=%D0%A1%D3%99%D0%BB%D0%B5%D0%BC%D0%B5%D1%82%D1%81%D1%96%D0%B7%20%D0%B1%D0%B5!%20%D0%A6%D0%B8%D1%84%D1%80%D0%BB%D1%8B%D2%9B%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D1%82%D1%96%203%20%D0%BA%D2%AF%D0%BD%20%D1%81%D1%8B%D0%BD%D0%B0%D0%BF%20%D0%BA%D3%A9%D1%80%D0%B3%D1%96%D0%BC%20%D0%BA%D0%B5%D0%BB%D0%B5%D0%B4%D1%96.%20%D0%91%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D1%96%D0%BC%3A%20___.%20%D0%A1%D1%8B%D0%BD%D0%B0%D2%9B%20%D1%82%D0%B0%D0%BF%D1%81%D1%8B%D1%80%D0%BC%D0%B0%D1%81%D1%8B%3A%20___.%20%D0%AB%D2%A3%D2%93%D0%B0%D0%B9%D0%BB%D1%8B%20%D0%BC%D0%B5%D1%81%D1%81%D0%B5%D0%BD%D0%B4%D0%B6%D0%B5%D1%80%3A%20WhatsApp%20%2F%20Telegram." target="_top">3 күн сынап көру</a>
-            <button class="demo-watch" type="button" data-demo-watch>Қалай жұмыс істейді <span aria-hidden="true">↗</span></button>
+            <button class="demo-watch" type="button" data-demo-watch><span aria-hidden="true">▶</span> Демонстрацияны көру</button>
           </div>
           <p class="hero-pilot-note">Алғашқы 5 компанияға · 1 тапсырма · 3 күн тегін сынақ</p>
         </div>
 
-        <aside class="product-demo" id="demo" aria-label="Ассистент жұмысының мысалы" tabindex="-1">
+        <aside class="product-demo" id="demo" data-demo-state="ready" aria-label="Ассистент жұмысының мысалы" tabindex="-1">
           <div class="demo-heading"><span class="demo-wordmark">DA<span aria-hidden="true">/</span></span><span data-copy="demoTitle">Бір тапсырма. Дайын нәтиже.</span><span class="demo-duration" aria-hidden="true">24 с</span></div>
           <div class="demo-window">
             <div class="demo-channel"><span class="assistant-avatar" aria-hidden="true">A</span><div><strong data-copy="assistantName">Цифрлық ассистент</strong><span>WhatsApp / Telegram</span></div><span class="demo-tag" data-copy="example">Мысал</span></div>
             <div class="demo-stage">
-              <section class="demo-scene" data-scene="0" aria-label="Тапсырма" tabindex="-1">
+              <div class="demo-cover" data-demo-cover>
+                <span class="cover-eyebrow" data-copy="coverEyebrow">24 СЕКУНДТЫҚ ДЕМОНСТРАЦИЯ</span>
+                <h3 data-copy="coverTitle">Бір хабарлама.<br>Есеп пен тапсырмалар дайын.</h3>
+                <p data-copy="coverDescription">Сатылымды бақылау мысалында ассистенттің жұмысын көріңіз.</p>
+                <button class="demo-start" type="button" data-demo-start><span class="play-symbol" aria-hidden="true">▶</span><span><strong data-copy="coverPlay">Демонстрацияны көру</strong><small data-copy="coverDuration">24 секунд · дыбыссыз</small></span></button>
+                <span class="cover-bottom" data-copy="coverBottom">Сұрау → есеп → әрекет → нәтиже</span>
+              </div>
+              <section class="demo-scene" data-scene="0" aria-label="Тапсырма" tabindex="-1" hidden inert aria-hidden="true">
                 <p class="scene-kicker" data-copy="scene1Kicker">ДҮЙСЕНБІ, 09:00 · СІЗДІҢ ТАПСЫРМАҢЫЗ</p>
                 <div class="chat-bubble chat-bubble--owner scene-child"><p data-copy="ownerRequest">Апталық сатылымды қорытындыла. Қай жерде іркіліс бар? Командаға тапсырмалар дайында.</p><span class="chat-meta" aria-hidden="true">09:00 ✓✓</span></div>
                 <div class="chat-bubble chat-bubble--assistant scene-child"><p data-copy="assistantReply">Деректерді салыстырып, қысқаша есеп пен тапсырмалар тізімін дайындаймын.</p><span class="chat-meta" aria-hidden="true">09:00</span></div>
@@ -85,10 +92,10 @@
             </div>
           </div>
           <div class="demo-controls">
-            <div class="demo-timeline" aria-label="Көрсетілім кезеңдері"><button type="button" data-demo-step="0" aria-current="step"><span class="step-track"><i></i></span><span data-copy="step1">Тапсырма</span></button><button type="button" data-demo-step="1"><span class="step-track"><i></i></span><span data-copy="step2">Есеп</span></button><button type="button" data-demo-step="2"><span class="step-track"><i></i></span><span data-copy="step3">Әрекет</span></button><button type="button" data-demo-step="3"><span class="step-track"><i></i></span><span data-copy="step4">Нәтиже</span></button></div>
-            <div class="playback-controls"><button type="button" data-demo-toggle aria-label="Кідірту"><span data-playback-icon aria-hidden="true">Ⅱ</span><span class="sr-only" data-playback-label>Кідірту</span></button><button type="button" data-demo-replay aria-label="Қайта көру"><span aria-hidden="true">↺</span></button></div>
+            <div class="playback-controls"><button type="button" data-demo-toggle aria-label="Көру"><span data-playback-icon aria-hidden="true">▶</span><span data-playback-label>Көру</span></button><span class="playback-time" data-playback-time aria-hidden="true">0:00 / 0:24</span><button type="button" data-demo-replay aria-label="Қайта көру"><span aria-hidden="true">↺</span><span data-copy="replayLabel">Қайта</span></button></div>
+            <div class="demo-timeline" aria-label="Көрсетілім кезеңдері"><button type="button" data-demo-step="0"><span class="step-track"><i></i></span><span data-copy="step1">Тапсырма</span></button><button type="button" data-demo-step="1"><span class="step-track"><i></i></span><span data-copy="step2">Есеп</span></button><button type="button" data-demo-step="2"><span class="step-track"><i></i></span><span data-copy="step3">Әрекет</span></button><button type="button" data-demo-step="3"><span class="step-track"><i></i></span><span data-copy="step4">Нәтиже</span></button></div>
           </div>
-          <p class="demo-disclaimer" data-copy="demoDisclaimer">Сценарий үлгісі · деректер шартты. Интеграциялар толық енгізу кезінде, жүйелердің мүмкіндігіне қарай бапталады. Көрсетілім жылдамдығы нақты жұмыс уақытын білдірмейді.</p>
+          <p class="demo-disclaimer" data-copy="demoDisclaimer">Шартты деректер. Интеграциялар — толық енгізуде. Жылдамдық нақты жұмыс уақытын білдірмейді.</p>
           <noscript><p class="demo-disclaimer">Интерактивті көрсетілім үшін JavaScript қосыңыз.</p></noscript>
         </aside>
       </section>

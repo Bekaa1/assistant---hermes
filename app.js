@@ -15,7 +15,7 @@ const russianCopy = {
   '.hero-main h1': 'Меньше рутины.<br><em>Больше времени на бизнес.</em>',
   '.hero-text': 'Отчёты, документы и поручения — с одного сообщения в WhatsApp или Telegram. Вы ставите задачу. Ассистент готовит результат.',
   '.hero-action .button': 'Получить тест на 3 дня',
-  '.demo-watch': 'Посмотреть, как работает <span aria-hidden="true">↗</span>',
+  '.demo-watch': '<span aria-hidden="true">▶</span> Смотреть демонстрацию',
   '.hero-pilot-note': 'Первым 5 компаниям · 1 задача · 3 дня бесплатно',
   '#tasks .section-head .overline': 'Что меняется после запуска',
   '#tasks .section-head h2': 'Не ищете инструменты.<br>Просто ставите задачу.',
@@ -80,6 +80,10 @@ const russianCopy = {
 };
 
 const demoRussian = {
+  coverEyebrow: 'ДЕМОНСТРАЦИЯ ЗА 24 СЕКУНДЫ', coverTitle: 'Одно сообщение.<br>Отчёт и задачи готовы.',
+  coverDescription: 'Посмотрите работу ассистента на примере контроля продаж.',
+  coverPlay: 'Смотреть демонстрацию', coverDuration: '24 секунды · без звука',
+  coverBottom: 'Запрос → отчёт → действия → результат', replayLabel: 'Повтор',
   demoTitle: 'Одна задача. Готовый результат.', assistantName: 'Цифровой ассистент', example: 'Пример',
   scene1Kicker: 'ПОНЕДЕЛЬНИК, 09:00 · ВАША ЗАДАЧА',
   ownerRequest: 'Подведи итоги продаж за неделю. Где теряем клиентов? Подготовь задачи команде.',
@@ -98,7 +102,7 @@ const demoRussian = {
   resultDescription: 'Ассистент собирает информацию и готовит план действий. Вы занимаетесь бизнесом.',
   trialCta: 'Получить тест на 3 дня', resultScope: 'В пилоте — одна задача, без интеграций.',
   step1: 'Запрос', step2: 'Отчёт', step3: 'Действия', step4: 'Результат',
-  demoDisclaimer: 'Пример сценария · демонстрационные данные. Интеграции настраиваются при полном внедрении с учётом возможностей систем. Темп демонстрации не отражает реальное время выполнения.',
+  demoDisclaimer: 'Данные условные. Интеграции — при полном внедрении. Темп не отражает реальное время выполнения.',
   pilotEyebrow: 'ДЛЯ ПЕРВЫХ 5 КОМПАНИЙ', pilotTitle: 'Сначала проверьте<br>на своей задаче.',
   pilotDays: 'дня бесплатного теста', pilotTask: 'рабочая задача', pilotChannel: 'мессенджер',
   pilotDescription: 'Вместе выбираем задачу и настраиваем ассистента. Вы пробуете три дня. Подходит — переходим к полному внедрению. Покупать необязательно.',
@@ -196,40 +200,51 @@ setLanguage('kz');
   const scenes = [...demo.querySelectorAll('[data-scene]')];
   const steps = [...demo.querySelectorAll('[data-demo-step]')];
   const toggle = demo.querySelector('[data-demo-toggle]');
+  const cover = demo.querySelector('[data-demo-cover]');
+  const clock = demo.querySelector('[data-playback-time]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const duration = 6000;
-  let step = reduceMotion.matches ? 3 : 0;
+  let step = 0;
   let elapsed = 0;
-  let playing = !reduceMotion.matches;
+  let started = false;
+  let playing = false;
   let inView = !('IntersectionObserver' in window);
   let raf = 0;
   let lastTime = null;
 
   function updateControls() {
     const words = currentLanguage === 'ru'
-      ? { pause: 'Пауза', play: 'Продолжить', replay: 'Посмотреть ещё раз' }
-      : { pause: 'Кідірту', play: 'Жалғастыру', replay: 'Қайта көру' };
+      ? { pause: 'Пауза', play: 'Продолжить', replay: 'Повторить', start: 'Смотреть' }
+      : { pause: 'Кідірту', play: 'Жалғастыру', replay: 'Қайта көру', start: 'Көру' };
     const finished = step === scenes.length - 1 && elapsed >= duration;
-    const label = finished ? words.replay : playing ? words.pause : words.play;
+    const label = !started ? words.start : finished ? words.replay : playing ? words.pause : words.play;
     toggle.setAttribute('aria-label', label);
     toggle.querySelector('[data-playback-label]').textContent = label;
     toggle.querySelector('[data-playback-icon]').textContent = finished ? '↺' : playing ? 'Ⅱ' : '▶';
     demo.dataset.playing = String(playing && inView && !document.hidden);
+    demo.dataset.demoState = !started ? 'ready' : finished ? 'ended' : playing ? 'playing' : 'paused';
+    const second = Math.min(24, Math.floor((step * duration + elapsed) / 1000));
+    clock.textContent = `0:${String(second).padStart(2, '0')} / 0:24`;
   }
 
   function showStep(index) {
     step = Math.max(0, Math.min(scenes.length - 1, index));
     scenes.forEach((scene, i) => {
-      const isCurrent = i === step;
+      const isCurrent = started && i === step;
       if (!isCurrent && scene.contains(document.activeElement)) toggle.focus({ preventScroll: true });
       scene.hidden = !isCurrent;
+      scene.inert = !isCurrent;
+      scene.setAttribute('aria-hidden', String(!isCurrent));
       scene.setAttribute('aria-label', steps[i].textContent.trim());
     });
     steps.forEach((button, i) => {
-      if (i === step) button.setAttribute('aria-current', 'step');
+      if (started && i === step) button.setAttribute('aria-current', 'step');
       else button.removeAttribute('aria-current');
       button.querySelector('i').style.transform = `scaleX(${i < step ? 1 : 0})`;
     });
+    cover.hidden = started;
+    cover.inert = started;
+    cover.setAttribute('aria-hidden', String(started));
     updateControls();
   }
 
@@ -243,6 +258,8 @@ setLanguage('kz');
       else { elapsed = duration; playing = false; updateControls(); }
     }
     steps[step].querySelector('i').style.transform = `scaleX(${elapsed / duration})`;
+    const second = Math.min(24, Math.floor((step * duration + elapsed) / 1000));
+    clock.textContent = `0:${String(second).padStart(2, '0')} / 0:24`;
     if (playing) raf = requestAnimationFrame(tick);
   }
 
@@ -254,14 +271,18 @@ setLanguage('kz');
     if (playing && inView && !document.hidden) raf = requestAnimationFrame(tick);
   }
 
-  function restart() { elapsed = 0; playing = true; showStep(0); schedule(); }
+  function restart() {
+    if (cover.contains(document.activeElement)) toggle.focus({ preventScroll: true });
+    started = true; elapsed = 0; playing = true; showStep(0); schedule();
+  }
   toggle.addEventListener('click', () => {
-    if (step === scenes.length - 1 && elapsed >= duration) restart();
+    if (!started || (step === scenes.length - 1 && elapsed >= duration)) restart();
     else { playing = !playing; schedule(); }
   });
   demo.querySelector('[data-demo-replay]').addEventListener('click', restart);
+  demo.querySelector('[data-demo-start]').addEventListener('click', restart);
   steps.forEach((button, index) => button.addEventListener('click', () => {
-    elapsed = 0; playing = false; showStep(index); schedule();
+    started = true; elapsed = 0; playing = false; showStep(index); schedule();
   }));
   document.querySelector('[data-demo-watch]')?.addEventListener('click', () => {
     restart();
@@ -277,10 +298,10 @@ setLanguage('kz');
     elapsed = 0; showStep(step); schedule();
   });
   reduceMotion.addEventListener('change', () => {
-    if (reduceMotion.matches) { playing = false; elapsed = 0; showStep(3); schedule(); }
+    if (reduceMotion.matches) { playing = false; schedule(); }
   });
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; schedule(); }, { threshold: .15 }).observe(demo);
+    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting && entry.intersectionRatio >= .15; schedule(); }, { threshold: [0, .15] }).observe(demo);
   }
   showStep(step);
   schedule();
