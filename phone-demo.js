@@ -105,9 +105,13 @@
     if (event.card === 'tasks') return `<div class="pd-card-eyebrow"><span>${t.tasksTitle}</span><span>${t.draft}</span></div><ul class="pd-task-list"><li><span class="pd-task-box" aria-hidden="true"></span><p>${t.task1}<small>${t.task1Who}</small></p></li><li><span class="pd-task-box" aria-hidden="true"></span><p>${t.task2}<small>${t.task2Who}</small></p></li></ul>`;
     return `<strong>${t.ending}</strong>${t.waiting}<br>${t.endingNote}`;
   }
-  function scrollChat(smooth = true) {
+  function scrollChat(smooth = true, revealLatest = false) {
     if (!followChat) return;
-    chat.scrollTo({ top: chat.scrollHeight, behavior: smooth && !reduced.matches ? 'smooth' : 'instant' });
+    const latest = messages.lastElementChild;
+    // At large text sizes or on very short screens, show the top of a tall card first.
+    const tall = revealLatest && latest && latest.offsetHeight > chat.clientHeight - 20;
+    const top = tall ? latest.getBoundingClientRect().top - chat.getBoundingClientRect().top + chat.scrollTop - 10 : chat.scrollHeight;
+    chat.scrollTo({ top, behavior: smooth && !reduced.matches ? 'smooth' : 'instant' });
   }
   function appendMessage(event, index, animate = true) {
     const node = document.createElement('div');
@@ -161,7 +165,7 @@
       if (phase === index) item.setAttribute('aria-current', 'step');
       else item.removeAttribute('aria-current');
     });
-    if (added || typingChanged) scrollChat();
+    if (added || typingChanged) scrollChat(true, added);
     refreshControls();
   }
   function tick(time) {
@@ -240,6 +244,15 @@
   dialog.querySelector('[data-phone-close]').addEventListener('click', closeDemo);
   dialog.addEventListener('cancel', event => { event.preventDefault(); closeDemo(); });
   dialog.addEventListener('close', onClose);
+  dialog.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const focusable = [...dialog.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]')]
+      .filter(element => element.getClientRects().length && getComputedStyle(element).visibility !== 'hidden');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  });
   dialog.addEventListener('pointerdown', event => { backdropDown = event.target === dialog; });
   dialog.addEventListener('click', event => {
     if (!backdropDown || event.target !== dialog) return;
