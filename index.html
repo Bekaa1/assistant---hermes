@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
-  <noscript><style>.reveal{opacity:1;transform:none}.demo-controls,.demo-watch{display:none}</style></noscript>
+    <link rel="stylesheet" href="./phone-demo.css" />
+  <noscript><style>.reveal{opacity:1;transform:none}.pd-teaser,.demo-watch{display:none}.hero{grid-template-columns:1fr}</style></noscript>
   </head>
   <body>
     <header class="header shell">
@@ -47,57 +48,17 @@
           <p class="hero-text">Есептер, құжаттар және тапсырмалар — WhatsApp немесе Telegram-дағы бір хабарламадан. Сіз міндетті айтасыз. Ассистент нәтижені дайындайды.</p>
           <div class="hero-action">
             <a class="button button--signal" href="https://wa.me/77479896274?text=%D0%A1%D3%99%D0%BB%D0%B5%D0%BC%D0%B5%D1%82%D1%81%D1%96%D0%B7%20%D0%B1%D0%B5!%20%D0%A6%D0%B8%D1%84%D1%80%D0%BB%D1%8B%D2%9B%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D1%82%D1%96%203%20%D0%BA%D2%AF%D0%BD%20%D1%81%D1%8B%D0%BD%D0%B0%D0%BF%20%D0%BA%D3%A9%D1%80%D0%B3%D1%96%D0%BC%20%D0%BA%D0%B5%D0%BB%D0%B5%D0%B4%D1%96.%20%D0%91%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D1%96%D0%BC%3A%20___.%20%D0%A1%D1%8B%D0%BD%D0%B0%D2%9B%20%D1%82%D0%B0%D0%BF%D1%81%D1%8B%D1%80%D0%BC%D0%B0%D1%81%D1%8B%3A%20___.%20%D0%AB%D2%A3%D2%93%D0%B0%D0%B9%D0%BB%D1%8B%20%D0%BC%D0%B5%D1%81%D1%81%D0%B5%D0%BD%D0%B4%D0%B6%D0%B5%D1%80%3A%20WhatsApp%20%2F%20Telegram." target="_top">3 күн сынап көру</a>
-            <button class="demo-watch" type="button" data-demo-watch><span aria-hidden="true">▶</span> Демонстрацияны көру</button>
+            <button class="demo-watch" type="button" data-demo-open aria-haspopup="dialog" aria-controls="demo-dialog"><span aria-hidden="true">▶</span> Демонстрацияны көру</button>
           </div>
           <p class="hero-pilot-note">Алғашқы 5 компанияға · 1 тапсырма · 3 күн тегін сынақ</p>
         </div>
 
-        <aside class="product-demo" id="demo" data-demo-state="ready" aria-label="Ассистент жұмысының мысалы" tabindex="-1">
-          <div class="demo-heading"><span class="demo-wordmark">DA<span aria-hidden="true">/</span></span><span data-copy="demoTitle">Бір тапсырма. Дайын нәтиже.</span><span class="demo-duration" aria-hidden="true">24 с</span></div>
-          <div class="demo-window">
-            <div class="demo-channel"><span class="assistant-avatar" aria-hidden="true">A</span><div><strong data-copy="assistantName">Цифрлық ассистент</strong><span>WhatsApp / Telegram</span></div><span class="demo-tag" data-copy="example">Мысал</span></div>
-            <div class="demo-stage">
-              <div class="demo-cover" data-demo-cover>
-                <span class="cover-eyebrow" data-copy="coverEyebrow">24 СЕКУНДТЫҚ ДЕМОНСТРАЦИЯ</span>
-                <h3 data-copy="coverTitle">Бір хабарлама.<br>Есеп пен тапсырмалар дайын.</h3>
-                <p data-copy="coverDescription">Сатылымды бақылау мысалында ассистенттің жұмысын көріңіз.</p>
-                <button class="demo-start" type="button" data-demo-start><span class="play-symbol" aria-hidden="true">▶</span><span><strong data-copy="coverPlay">Демонстрацияны көру</strong><small data-copy="coverDuration">24 секунд · дыбыссыз</small></span></button>
-                <span class="cover-bottom" data-copy="coverBottom">Сұрау → есеп → әрекет → нәтиже</span>
-              </div>
-              <section class="demo-scene" data-scene="0" aria-label="Тапсырма" tabindex="-1" hidden inert aria-hidden="true">
-                <p class="scene-kicker" data-copy="scene1Kicker">ДҮЙСЕНБІ, 09:00 · СІЗДІҢ ТАПСЫРМАҢЫЗ</p>
-                <div class="chat-bubble chat-bubble--owner scene-child"><p data-copy="ownerRequest">Апталық сатылымды қорытындыла. Қай жерде іркіліс бар? Командаға тапсырмалар дайында.</p><span class="chat-meta" aria-hidden="true">09:00 ✓✓</span></div>
-                <div class="chat-bubble chat-bubble--assistant scene-child"><p data-copy="assistantReply">Деректерді салыстырып, қысқаша есеп пен тапсырмалар тізімін дайындаймын.</p><span class="chat-meta" aria-hidden="true">09:00</span></div>
-                <div class="demo-context scene-child"><span class="context-rule" aria-hidden="true"></span><p data-copy="scene1Note">Бір хабарлама — әр сервиске бөлек кірудің орнына.</p></div>
-              </section>
-              <section class="demo-scene" data-scene="1" aria-label="Есеп" tabindex="-1" hidden>
-                <p class="scene-kicker" data-copy="scene2Kicker">ҚОСЫЛҒАН ЖҮЙЕЛЕРДЕН — БІР ЕСЕПКЕ</p>
-                <div class="source-strip scene-child"><span>CRM</span><span aria-hidden="true">+</span><span>Google Sheets</span><span class="source-state" data-copy="checked">Салыстырылды ✓</span></div>
-                <div class="report-card scene-child"><div class="report-heading"><span data-copy="weeklyReport">Апталық сатылым</span><span class="report-period">01–07</span></div><strong class="report-revenue">4 280 000 <small>₸</small></strong><p class="report-label" data-copy="sampleRevenue">Демонстрациялық түсім</p><div class="mini-chart" aria-hidden="true"><i style="--bar:42%"></i><i style="--bar:65%"></i><i style="--bar:55%"></i><i style="--bar:90%"></i><i style="--bar:74%"></i><i style="--bar:62%"></i><i style="--bar:38%"></i></div><div class="report-insight"><span aria-hidden="true">!</span><p data-copy="reportInsight">9 өтінім жауапсыз. 4 мәміле бойынша мерзім өтті.</p></div></div>
-                <p class="scene-footnote scene-child" data-copy="scene2Note">Маңыздысы бірден көрінеді: қай жерге назар аудару керек.</p>
-              </section>
-              <section class="demo-scene" data-scene="2" aria-label="Тапсырмалар" tabindex="-1" hidden>
-                <p class="scene-kicker" data-copy="scene3Kicker">ҚОРЫТЫНДЫДАН — НАҚТЫ ӘРЕКЕТКЕ</p>
-                <div class="task-card scene-child"><div class="task-heading"><strong data-copy="taskDrafts">Тапсырмалар жобасы</strong><span>Trello</span></div><div class="demo-task"><span aria-hidden="true">01</span><p data-copy="task1">Жауапсыз 9 өтінімге хабарласу<small>Сату менеджері · бүгін</small></p></div><div class="demo-task"><span aria-hidden="true">02</span><p data-copy="task2">Мерзімі өткен 4 мәмілені тексеру<small>Бөлім басшысы · бүгін</small></p></div><div class="demo-task"><span aria-hidden="true">03</span><p data-copy="task3">Нәтижелерді келесі есепке қосу<small>Ассистент · апта соңында</small></p></div></div>
-                <div class="approval-note scene-child"><span aria-hidden="true">✓</span><p data-copy="approval">Тексересіз. Растайсыз. Содан кейін ғана тапсырмалар жүйеге қосылады.</p></div>
-              </section>
-              <section class="demo-scene demo-scene--result" data-scene="3" aria-label="Нәтиже" tabindex="-1" hidden>
-                <span class="result-check scene-child" aria-hidden="true">✓</span>
-                <p class="scene-kicker" data-copy="scene4Kicker">ШЕШІМ ҚАБЫЛДАУ — ӨЗІҢІЗДЕ</p>
-                <h3 class="scene-child" data-copy="resultTitle">Есеп дайын.<br>Келесі қадам түсінікті.</h3>
-                <p class="result-description scene-child" data-copy="resultDescription">Ассистент ақпаратты жинап, әрекет жоспарын дайындайды. Сіз бизнеске көңіл бөлесіз.</p>
-                <a class="button button--signal scene-child" href="https://wa.me/77479896274?text=%D0%A1%D3%99%D0%BB%D0%B5%D0%BC%D0%B5%D1%82%D1%81%D1%96%D0%B7%20%D0%B1%D0%B5!%20%D0%A6%D0%B8%D1%84%D1%80%D0%BB%D1%8B%D2%9B%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D1%82%D1%96%203%20%D0%BA%D2%AF%D0%BD%20%D1%81%D1%8B%D0%BD%D0%B0%D0%BF%20%D0%BA%D3%A9%D1%80%D0%B3%D1%96%D0%BC%20%D0%BA%D0%B5%D0%BB%D0%B5%D0%B4%D1%96.%20%D0%91%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D1%96%D0%BC%3A%20___.%20%D0%A1%D1%8B%D0%BD%D0%B0%D2%9B%20%D1%82%D0%B0%D0%BF%D1%81%D1%8B%D1%80%D0%BC%D0%B0%D1%81%D1%8B%3A%20___.%20%D0%AB%D2%A3%D2%93%D0%B0%D0%B9%D0%BB%D1%8B%20%D0%BC%D0%B5%D1%81%D1%81%D0%B5%D0%BD%D0%B4%D0%B6%D0%B5%D1%80%3A%20WhatsApp%20%2F%20Telegram." target="_top" data-copy="trialCta">3 күн сынап көру</a>
-                <small class="result-scope scene-child" data-copy="resultScope">Сынақта — бір тапсырма, интеграциясыз.</small>
-              </section>
-            </div>
-          </div>
-          <div class="demo-controls">
-            <div class="playback-controls"><button type="button" data-demo-toggle aria-label="Көру"><span data-playback-icon aria-hidden="true">▶</span><span data-playback-label>Көру</span></button><span class="playback-time" data-playback-time aria-hidden="true">0:00 / 0:24</span><button type="button" data-demo-replay aria-label="Қайта көру"><span aria-hidden="true">↺</span><span data-copy="replayLabel">Қайта</span></button></div>
-            <div class="demo-timeline" aria-label="Көрсетілім кезеңдері"><button type="button" data-demo-step="0"><span class="step-track"><i></i></span><span data-copy="step1">Тапсырма</span></button><button type="button" data-demo-step="1"><span class="step-track"><i></i></span><span data-copy="step2">Есеп</span></button><button type="button" data-demo-step="2"><span class="step-track"><i></i></span><span data-copy="step3">Әрекет</span></button><button type="button" data-demo-step="3"><span class="step-track"><i></i></span><span data-copy="step4">Нәтиже</span></button></div>
-          </div>
-          <p class="demo-disclaimer" data-copy="demoDisclaimer">Шартты деректер. Интеграциялар — толық енгізуде. Жылдамдық нақты жұмыс уақытын білдірмейді.</p>
-          <noscript><p class="demo-disclaimer">Интерактивті көрсетілім үшін JavaScript қосыңыз.</p></noscript>
-        </aside>
+        <button class="pd-teaser" type="button" data-demo-open aria-haspopup="dialog" aria-controls="demo-dialog">
+          <span class="pd-teaser-top"><span data-phone-copy="teaserEyebrow">АССИСТЕНТ ІС ЖҮЗІНДЕ</span><span>01 / 03</span></span>
+          <span class="pd-teaser-title" data-phone-copy="teaserTitle">Сату қалай жүріп жатыр?<br>Жауабы — бір чатта.</span>
+          <span class="pd-teaser-rule"></span>
+          <span class="pd-teaser-bottom"><span class="pd-play-disc" aria-hidden="true">▶</span><span><strong data-phone-copy="teaserPlay">Демонстрацияны ашу</strong><small data-phone-copy="teaserDuration">30 секунд · дыбыссыз</small></span><span class="pd-teaser-arrow" aria-hidden="true">↗</span></span>
+        </button>
       </section>
 
       <section class="pilot-section shell" id="pilot">
@@ -227,6 +188,47 @@
       </div>
     </div>
 
+    <dialog class="pd-modal" id="demo-dialog" aria-labelledby="pd-title" aria-describedby="pd-description">
+      <div class="pd-modal-heading">
+        <span class="pd-modal-label"><span class="pd-label-mark" aria-hidden="true">DA/</span><span data-phone-copy="modalLabel">30 СЕКУНДТА БІР ЖҰМЫС КҮНІ</span></span>
+        <button class="pd-close" type="button" data-phone-close aria-label="Демонстрацияны жабу"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="pd-content">
+        <div class="pd-story">
+          <p class="pd-eyebrow" data-phone-copy="storyEyebrow">СІЗ АЙТАСЫЗ. ОЛ ДАЙЫНДАЙДЫ.</p>
+          <h2 id="pd-title" data-phone-copy="storyTitle">Бір диалог.<br><em>Істер бақылауда.</em></h2>
+          <p id="pd-description" data-phone-copy="storyDescription">Сату туралы сұрақтан — командаға дайын тапсырмаларға дейін.</p>
+          <ol class="pd-chapters">
+            <li data-phase="0"><span>01</span><div><strong data-phone-copy="phase1">Сатуды көру</strong><small data-phone-copy="phase1Detail">Түсім және апталық диаграмма</small></div></li>
+            <li data-phase="1"><span>02</span><div><strong data-phone-copy="phase2">Мәселені анықтау</strong><small data-phone-copy="phase2Detail">Назар аударуды қажет ететін өтінімдер</small></div></li>
+            <li data-phase="2"><span>03</span><div><strong data-phone-copy="phase3">Әрекетке көшу</strong><small data-phone-copy="phase3Detail">Тапсырмалар дайын. Растау — сізден.</small></div></li>
+          </ol>
+          <a class="pd-trial" href="https://wa.me/77479896274?text=%D0%A1%D3%99%D0%BB%D0%B5%D0%BC%D0%B5%D1%82%D1%81%D1%96%D0%B7%20%D0%B1%D0%B5!%20%D0%A6%D0%B8%D1%84%D1%80%D0%BB%D1%8B%D2%9B%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D1%82%D1%96%203%20%D0%BA%D2%AF%D0%BD%20%D1%81%D1%8B%D0%BD%D0%B0%D0%BF%20%D0%BA%D3%A9%D1%80%D0%B3%D1%96%D0%BC%20%D0%BA%D0%B5%D0%BB%D0%B5%D0%B4%D1%96.%20%D0%91%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D1%96%D0%BC%3A%20___.%20%D0%A1%D1%8B%D0%BD%D0%B0%D2%9B%20%D1%82%D0%B0%D0%BF%D1%81%D1%8B%D1%80%D0%BC%D0%B0%D1%81%D1%8B%3A%20___.%20%D0%AB%D2%A3%D2%93%D0%B0%D0%B9%D0%BB%D1%8B%20%D0%BC%D0%B5%D1%81%D1%81%D0%B5%D0%BD%D0%B4%D0%B6%D0%B5%D1%80%3A%20WhatsApp%20%2F%20Telegram." target="_top"><span data-phone-copy="trial">Өз бизнесімде сынап көру</span><span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="pd-viewer">
+          <div class="pd-phone">
+            <div class="pd-screen">
+              <div class="pd-status" aria-hidden="true"><strong>9:41</strong><span class="pd-island"></span><span>5G <svg viewBox="0 0 26 13" width="25" height="13"><rect x="1" y="1" width="21" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="3" y="3" width="17" height="7" rx="1" fill="currentColor"/><path d="M24 4v5" stroke="currentColor" stroke-width="2"/></svg></span></div>
+              <div class="pd-chat-header"><span class="pd-back" aria-hidden="true">‹</span><span class="pd-avatar" aria-hidden="true">A</span><div><strong data-phone-copy="assistantName">Цифрлық ассистент</strong><small data-phone-status>Желіде</small></div><span class="pd-chat-more" aria-hidden="true">···</span></div>
+              <div class="pd-example" data-phone-copy="exampleLabel">Демонстрация · шартты деректер</div>
+              <div class="pd-chat" role="log" aria-label="Ассистентпен демонстрациялық диалог" aria-live="polite" aria-relevant="additions" tabindex="0">
+                <span class="pd-day" data-phone-copy="today">Бүгін</span>
+                <div class="pd-messages"></div>
+                <div class="pd-typing" hidden aria-label="Ассистент жазып жатыр"><i></i><i></i><i></i></div>
+              </div>
+              <div class="pd-composer" aria-hidden="true"><span class="pd-plus">+</span><span class="pd-composer-field" data-phone-composer>Хабарлама</span><span class="pd-send">↑</span></div>
+              <div class="pd-home" aria-hidden="true"><span></span></div>
+            </div>
+          </div>
+          <div class="pd-player">
+            <div class="pd-progress" role="progressbar" aria-label="Демонстрация барысы" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0"><span></span></div>
+            <div class="pd-player-row"><button type="button" data-phone-toggle><span data-phone-toggle-icon aria-hidden="true">Ⅱ</span><span data-phone-toggle-label>Кідірту</span></button><span class="pd-clock">0:00 / 0:30</span><button type="button" data-phone-replay><span aria-hidden="true">↺</span><span data-phone-copy="replay">Қайта</span></button></div>
+          </div>
+        </div>
+      </div>
+      <p class="pd-legal" data-phone-copy="legal">Мысал сценарий. Интеграциялар толық енгізу кезінде қосылады. Көрсетілім жылдамдығы нақты жұмыс уақытын білдірмейді.</p>
+    </dialog>
     <script src="./app.js"></script>
+    <script src="./phone-demo.js"></script>
   </body>
 </html>

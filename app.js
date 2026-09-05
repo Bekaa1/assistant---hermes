@@ -80,29 +80,6 @@ const russianCopy = {
 };
 
 const demoRussian = {
-  coverEyebrow: 'ДЕМОНСТРАЦИЯ ЗА 24 СЕКУНДЫ', coverTitle: 'Одно сообщение.<br>Отчёт и задачи готовы.',
-  coverDescription: 'Посмотрите работу ассистента на примере контроля продаж.',
-  coverPlay: 'Смотреть демонстрацию', coverDuration: '24 секунды · без звука',
-  coverBottom: 'Запрос → отчёт → действия → результат', replayLabel: 'Повтор',
-  demoTitle: 'Одна задача. Готовый результат.', assistantName: 'Цифровой ассистент', example: 'Пример',
-  scene1Kicker: 'ПОНЕДЕЛЬНИК, 09:00 · ВАША ЗАДАЧА',
-  ownerRequest: 'Подведи итоги продаж за неделю. Где теряем клиентов? Подготовь задачи команде.',
-  assistantReply: 'Сопоставлю данные, подготовлю короткую сводку и список задач.',
-  scene1Note: 'Одно сообщение — вместо переключения между сервисами.',
-  scene2Kicker: 'ИЗ ПОДКЛЮЧЁННЫХ СИСТЕМ — В ОДИН ОТЧЁТ', checked: 'Сопоставлено ✓',
-  weeklyReport: 'Продажи за неделю', sampleRevenue: 'Демонстрационная выручка',
-  reportInsight: '9 заявок без ответа. По 4 сделкам пропущен срок.',
-  scene2Note: 'Главное уже выделено: куда направить внимание.',
-  scene3Kicker: 'ОТ ВЫВОДОВ — К КОНКРЕТНЫМ ДЕЙСТВИЯМ', taskDrafts: 'Черновики задач',
-  task1: 'Ответить на 9 заявок<small>Менеджер продаж · сегодня</small>',
-  task2: 'Проверить 4 просроченные сделки<small>Руководитель отдела · сегодня</small>',
-  task3: 'Включить результаты в следующую сводку<small>Ассистент · в конце недели</small>',
-  approval: 'Вы проверяете. Подтверждаете. Только после этого задачи появляются в системе.',
-  scene4Kicker: 'РЕШЕНИЯ ОСТАЮТСЯ ЗА ВАМИ', resultTitle: 'Отчёт готов.<br>Следующий шаг понятен.',
-  resultDescription: 'Ассистент собирает информацию и готовит план действий. Вы занимаетесь бизнесом.',
-  trialCta: 'Получить тест на 3 дня', resultScope: 'В пилоте — одна задача, без интеграций.',
-  step1: 'Запрос', step2: 'Отчёт', step3: 'Действия', step4: 'Результат',
-  demoDisclaimer: 'Данные условные. Интеграции — при полном внедрении. Темп не отражает реальное время выполнения.',
   pilotEyebrow: 'ДЛЯ ПЕРВЫХ 5 КОМПАНИЙ', pilotTitle: 'Сначала проверьте<br>на своей задаче.',
   pilotDays: 'дня бесплатного теста', pilotTask: 'рабочая задача', pilotChannel: 'мессенджер',
   pilotDescription: 'Вместе выбираем задачу и настраиваем ассистента. Вы пробуете три дня. Подходит — переходим к полному внедрению. Покупать необязательно.',
@@ -140,18 +117,12 @@ const ariaLabels = {
   ru: {
     '.proposal-mark': 'К началу страницы',
     '.offer-rail': 'Ключевые условия предложения',
-    '.product-demo': 'Анимированный пример работы ассистента',
-    '.demo-timeline': 'Этапы демонстрации',
-    '[data-demo-replay]': 'Посмотреть ещё раз',
     '.integration-list': 'Примеры систем для подключения',
     '.mobile-action': 'Ключевые условия и подключение'
   },
   kz: {
     '.proposal-mark': 'Беттің басына өту',
     '.offer-rail': 'Ұсыныстың негізгі шарттары',
-    '.product-demo': 'Ассистент жұмысының анимациялық мысалы',
-    '.demo-timeline': 'Көрсетілім кезеңдері',
-    '[data-demo-replay]': 'Қайта көру',
     '.integration-list': 'Қосуға болатын жүйелердің мысалдары',
     '.mobile-action': 'Негізгі шарттар және қосу'
   }
@@ -193,119 +164,6 @@ document.querySelectorAll('[data-language]').forEach((button) => {
 
 setLanguage('kz');
 
-// Local, scripted product illustration. No live integrations or customer data.
-(() => {
-  const demo = document.querySelector('.product-demo');
-  if (!demo) return;
-  const scenes = [...demo.querySelectorAll('[data-scene]')];
-  const steps = [...demo.querySelectorAll('[data-demo-step]')];
-  const toggle = demo.querySelector('[data-demo-toggle]');
-  const cover = demo.querySelector('[data-demo-cover]');
-  const clock = demo.querySelector('[data-playback-time]');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const duration = 6000;
-  let step = 0;
-  let elapsed = 0;
-  let started = false;
-  let playing = false;
-  let inView = !('IntersectionObserver' in window);
-  let raf = 0;
-  let lastTime = null;
-
-  function updateControls() {
-    const words = currentLanguage === 'ru'
-      ? { pause: 'Пауза', play: 'Продолжить', replay: 'Повторить', start: 'Смотреть' }
-      : { pause: 'Кідірту', play: 'Жалғастыру', replay: 'Қайта көру', start: 'Көру' };
-    const finished = step === scenes.length - 1 && elapsed >= duration;
-    const label = !started ? words.start : finished ? words.replay : playing ? words.pause : words.play;
-    toggle.setAttribute('aria-label', label);
-    toggle.querySelector('[data-playback-label]').textContent = label;
-    toggle.querySelector('[data-playback-icon]').textContent = finished ? '↺' : playing ? 'Ⅱ' : '▶';
-    demo.dataset.playing = String(playing && inView && !document.hidden);
-    demo.dataset.demoState = !started ? 'ready' : finished ? 'ended' : playing ? 'playing' : 'paused';
-    const second = Math.min(24, Math.floor((step * duration + elapsed) / 1000));
-    clock.textContent = `0:${String(second).padStart(2, '0')} / 0:24`;
-  }
-
-  function showStep(index) {
-    step = Math.max(0, Math.min(scenes.length - 1, index));
-    scenes.forEach((scene, i) => {
-      const isCurrent = started && i === step;
-      if (!isCurrent && scene.contains(document.activeElement)) toggle.focus({ preventScroll: true });
-      scene.hidden = !isCurrent;
-      scene.inert = !isCurrent;
-      scene.setAttribute('aria-hidden', String(!isCurrent));
-      scene.setAttribute('aria-label', steps[i].textContent.trim());
-    });
-    steps.forEach((button, i) => {
-      if (started && i === step) button.setAttribute('aria-current', 'step');
-      else button.removeAttribute('aria-current');
-      button.querySelector('i').style.transform = `scaleX(${i < step ? 1 : 0})`;
-    });
-    cover.hidden = started;
-    cover.inert = started;
-    cover.setAttribute('aria-hidden', String(started));
-    updateControls();
-  }
-
-  function tick(time) {
-    raf = 0;
-    if (!playing || !inView || document.hidden) { lastTime = null; return; }
-    if (lastTime !== null) elapsed += Math.min(time - lastTime, 100);
-    lastTime = time;
-    if (elapsed >= duration) {
-      if (step < scenes.length - 1) { elapsed = 0; showStep(step + 1); }
-      else { elapsed = duration; playing = false; updateControls(); }
-    }
-    steps[step].querySelector('i').style.transform = `scaleX(${elapsed / duration})`;
-    const second = Math.min(24, Math.floor((step * duration + elapsed) / 1000));
-    clock.textContent = `0:${String(second).padStart(2, '0')} / 0:24`;
-    if (playing) raf = requestAnimationFrame(tick);
-  }
-
-  function schedule() {
-    if (raf) cancelAnimationFrame(raf);
-    raf = 0;
-    lastTime = null;
-    updateControls();
-    if (playing && inView && !document.hidden) raf = requestAnimationFrame(tick);
-  }
-
-  function restart() {
-    if (cover.contains(document.activeElement)) toggle.focus({ preventScroll: true });
-    started = true; elapsed = 0; playing = true; showStep(0); schedule();
-  }
-  toggle.addEventListener('click', () => {
-    if (!started || (step === scenes.length - 1 && elapsed >= duration)) restart();
-    else { playing = !playing; schedule(); }
-  });
-  demo.querySelector('[data-demo-replay]').addEventListener('click', restart);
-  demo.querySelector('[data-demo-start]').addEventListener('click', restart);
-  steps.forEach((button, index) => button.addEventListener('click', () => {
-    started = true; elapsed = 0; playing = false; showStep(index); schedule();
-  }));
-  document.querySelector('[data-demo-watch]')?.addEventListener('click', () => {
-    restart();
-    demo.scrollIntoView({ behavior: reduceMotion.matches ? 'instant' : 'smooth', block: 'center' });
-    demo.focus({ preventScroll: true });
-  });
-  // Give keyboard users time to read and activate the CTA without a scene change.
-  demo.addEventListener('focusin', (event) => {
-    if (event.target.closest('.demo-scene')) { playing = false; schedule(); }
-  });
-  document.addEventListener('visibilitychange', schedule);
-  document.addEventListener('proposal:language', () => {
-    elapsed = 0; showStep(step); schedule();
-  });
-  reduceMotion.addEventListener('change', () => {
-    if (reduceMotion.matches) { playing = false; schedule(); }
-  });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting && entry.intersectionRatio >= .15; schedule(); }, { threshold: [0, .15] }).observe(demo);
-  }
-  showStep(step);
-  schedule();
-})();
 
 const revealItems = document.querySelectorAll('.reveal');
 
