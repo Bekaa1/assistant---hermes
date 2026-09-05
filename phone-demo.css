@@ -40,8 +40,9 @@ html.pd-open { overflow: hidden; scrollbar-gutter: stable; }
 .pd-trial { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 0; min-height: 48px; font-size: .9rem; font-weight: 600; border-bottom: 1px solid #d68e78; color: #ffb099; }
 .pd-trial:hover { color: #fff; }
 .pd-viewer { --pd-phone-width: clamp(244px, calc((100dvh - 226px) / 2.08), 320px); min-width: 0; width: var(--pd-phone-width); max-width: 100%; margin-inline: auto; }
-.pd-phone { width: 100%; height: auto; aspect-ratio: 1 / 2.08; min-height: 0; padding: 7px; border-radius: 44px; background: #080b0d; border: 1px solid #737b7b; box-shadow: 0 0 0 2px #101314, 12px 22px 45px #0006, inset 0 0 0 2px #313738; }
-.pd-screen { height: 100%; display: flex; flex-direction: column; overflow: hidden; border-radius: 36px; background: #eaf0eb; color: #202d26; isolation: isolate; }
+/* Pin the screen to the bezel; percentage heights can overflow an aspect-ratio frame in Safari. */
+.pd-phone { --pd-bezel: 7px; position: relative; width: 100%; height: auto; aspect-ratio: 1 / 2.08; min-height: 0; padding: var(--pd-bezel); overflow: hidden; border-radius: 44px; background: #080b0d; border: 1px solid #737b7b; box-shadow: 0 0 0 2px #101314, 12px 22px 45px #0006, inset 0 0 0 2px #313738; }
+.pd-screen { position: absolute; inset: var(--pd-bezel); height: auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: 36px; background: #eaf0eb; color: #202d26; isolation: isolate; }
 .pd-status { height: 38px; padding: 11px 23px 0; display: flex; align-items: center; justify-content: space-between; position: relative; flex-shrink: 0; color: #18251e; background: #f9fbf8; font-size: .75rem; }
 .pd-status > span:last-child { display: inline-flex; gap: 5px; align-items: center; font-size: .75rem; font-weight: 600; }
 .pd-island { position: absolute; width: 90px; height: 22px; border-radius: 20px; background: #080b0d; top: 8px; left: 50%; transform: translateX(-50%); }
@@ -124,7 +125,7 @@ html.pd-open { overflow: hidden; scrollbar-gutter: stable; }
   .pd-story { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .pd-story .pd-chapters, .pd-story .pd-trial, .pd-story .pd-eyebrow { display: none; }
   .pd-viewer { --pd-phone-width: clamp(244px, calc((100dvh - 228px) / 2.08), 320px); margin: 0 auto; }
-  .pd-phone { border-radius: 39px; padding: 6px; }
+  .pd-phone { --pd-bezel: 6px; border-radius: 39px; }
   .pd-screen { border-radius: 32px; }
   .pd-player { padding-top: 13px; }
   .pd-legal { font-size: .75rem; margin-top: 8px; line-height: 1.5; }
