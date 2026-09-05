@@ -429,6 +429,7 @@ a:focus-visible, button:focus-visible, .product-demo:focus-visible { outline: 3p
 }
 
 @media (max-width: 760px) {
+  html { scroll-padding-bottom: 130px; }
   body { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
   .offer-rail { display: none; }
   .mobile-action {
@@ -510,7 +511,7 @@ a:focus-visible, button:focus-visible, .product-demo:focus-visible { outline: 3p
   .use-case p, .case-result { grid-column: 2; }
   .case-result { padding-left: 14px; }
   .integration-section { margin-top: 96px; padding-top: 84px; }
-  .integration-copy h2 { font-size: 2.9rem; }
+  .integration-copy h2 { font-size: clamp(1.9rem, 8.2vw, 2.9rem); }
   .integration-list > div { grid-template-columns: 1fr; gap: 7px; }
   .integration-note { margin-top: 64px; grid-template-columns: 1fr; gap: 12px; }
   .integration-note small { grid-column: 1; }
@@ -521,10 +522,11 @@ a:focus-visible, button:focus-visible, .product-demo:focus-visible { outline: 3p
   .commercial-offer { padding: 42px 26px; }
   .commercial-price { font-size: 3.4rem; }
   .costs-section { margin-top: 96px; padding: 82px 0; }
+  .costs-title h2 { font-size: clamp(1.9rem, 8.2vw, 2.7rem); }
   .costs-table > div { align-items: flex-start; flex-direction: column; gap: 8px; }
   .costs-table .cost-total { padding: 20px; }
   .final-cta { width: 100%; margin-top: 96px; padding: 70px 22px; }
-  .final-cta h2 { font-size: 3.1rem; }
+  .final-cta h2 { font-size: clamp(1.9rem, 8.2vw, 3.1rem); }
   .footer { min-height: 120px; align-items: flex-start; flex-direction: column; justify-content: center; }
   .footer span:nth-child(2) { display: none; }
 }
